@@ -1,7 +1,25 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import express from 'express';
 
 import { AppModule } from './app.module';
+
+let cachedApp: any = null;
+const expressApp = express();
+
+async function createNestApp() {
+  if (!cachedApp) {
+    const adapter = new ExpressAdapter(expressApp);
+    expressApp.use(express.json());
+    expressApp.use(express.urlencoded({ extended: true }));
+    const app = await NestFactory.create(AppModule, adapter);
+    app.enableCors();
+    await app.init();
+    cachedApp = app;
+  }
+  return cachedApp;
+}
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -31,4 +49,13 @@ async function bootstrap() {
   return app;
 }
 
-export default bootstrap();
+// Export for Vercel
+export default async function handler(req: any, res: any) {
+  await createNestApp();
+  return expressApp(req, res);
+}
+
+// Run bootstrap only if not in Vercel
+if (process.env.VERCEL !== '1') {
+  bootstrap();
+}
