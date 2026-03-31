@@ -3,14 +3,13 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "buildCommand": "npx prisma generate && npm run build"
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "dist/src/main.js"
-    },
     {
       "src": "/(.*)",
       "dest": "dist/src/main.js"
