@@ -8,7 +8,7 @@ import { getUseCaseParams } from '@/shared/utils/commons';
 import { QueryDto } from '../dtos/commons';
 
 @Controller('leads')
-export class UserController {
+export class LeadsController {
 
   constructor(
     private readonly createCase: CreateUserUseCase,

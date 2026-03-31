@@ -32,7 +32,7 @@ export class CreateUserUseCase {
           message: app.errors.emailAlreadyRegistered,
         };
 
-      const newData = new User({
+      const data = new User({
         role: Role.USER,
         fullName,
         email,
@@ -43,7 +43,7 @@ export class CreateUserUseCase {
       });
 
 
-      const queryCreate = await this.repository.create(newData);
+      const queryCreate = await this.repository.create(data);
 
       if (!queryCreate)
         return { status: ResponseStatus.ERROR, message: app.errors.tryAgain };

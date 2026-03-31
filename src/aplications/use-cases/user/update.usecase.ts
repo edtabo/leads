@@ -24,7 +24,7 @@ export class UpdateUserUseCase {
 
       const { fullName, phone, source, productOfInterest, budget } = body;
 
-      const newData = new User({
+      const data = new User({
         id: String(id),
         role: Role.USER,
         fullName,
@@ -34,7 +34,7 @@ export class UpdateUserUseCase {
         budget,
       });
 
-      const queryUpdate = await this.repository.update(newData);
+      const queryUpdate = await this.repository.update(data);
 
       if (!queryUpdate)
         return { status: ResponseStatus.ERROR, message: app.errors.tryAgain };

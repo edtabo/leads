@@ -6,4 +6,7 @@ export class QueryDto {
 
   @IsOptional()
   page?: number;
+
+  @IsOptional()
+  search?: string;
 }

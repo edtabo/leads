@@ -139,8 +139,9 @@ export class PrismaUserRepository implements UserRepositoryPort {
 
   async update(data: User): Promise<boolean | null> {
     try {
-      if (!data.id || !data.email || !data.fullName || !data.source)
+      if (!data.id || !data.fullName || !data.source)
         return null;
+
 
       const query = await this.prisma.user.update({
         where: {
