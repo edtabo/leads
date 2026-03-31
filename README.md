@@ -56,6 +56,9 @@ DATABASE_URL="postgresql://neondb_owner:npg_TU_PASSWORD@ep-snowy-grass-an6g7m62-
 
 # API de IA (DeepSeek)
 DEEPSEEK_API_KEY="sk-tu-api-key-aqui"
+
+# AXIOM
+AXIOM_TOKEN="ABC-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"'
 ```
 
 4. **Ejecutar migraciones de Prisma**
@@ -209,13 +212,17 @@ src/
 └── shared/              # Utilidades compartidas
 ```
 
-## Variables de Entorno (.env.example)
+## Archivo .env
+
+Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
 
 ```env
-# Base de datos PostgreSQL
+# Environment variables declared in this file are NOT automatically loaded by Prisma.
+# Please add `import "dotenv/config";` to your `prisma.config.ts` file
+
+# Prisma supports the native connection string format for PostgreSQL
 DATABASE_URL="postgresql://[user]:[password]@[host]/[database]?sslmode=require"
 
-# API de IA (DeepSeek)
 DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 
