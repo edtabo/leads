@@ -88,6 +88,10 @@ npm run build
 npm run start:prod
 ```
 
+## Deploy
+
+https://leads-two-green.vercel.app/api/
+
 ### Puerto por defecto
 
 La API corre en `http://localhost:3005`
