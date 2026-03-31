@@ -2,17 +2,20 @@ import 'dotenv/config';
 
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { ExpressAdapter } from '@nestjs/platform-express';
+import express from 'express';
 
 import { AppModule } from './app.module';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+const expressApp = express();
+
+async function createNestApp() {
+  const adapter = new ExpressAdapter(expressApp);
+  const app = await NestFactory.create(AppModule, adapter);
   app.setGlobalPrefix('api');
   app.enableCors({
     methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
-    allowedHeaders: [
-      'Content-Type',
-    ],
+    allowedHeaders: ['Content-Type'],
     credentials: true,
     preflightContinue: false,
     optionsSuccessStatus: 204,
@@ -22,6 +25,14 @@ async function bootstrap() {
       transform: true,
     }),
   );
-  await app.listen(process.env.PORT ?? 3000);
+  await app.init();
+  return app;
 }
-bootstrap();
+
+// Export handler for Vercel
+export default async function (req: any, res: any) {
+  const app = await createNestApp();
+  const httpAdapter = app.getHttpAdapter();
+  httpAdapter.getInstance().use(expressApp);
+  return httpAdapter.getInstance()(req, res);
+}
