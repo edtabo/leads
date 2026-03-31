@@ -137,6 +137,47 @@ export class PrismaUserRepository implements UserRepositoryPort {
     }
   }
 
+  async createMany(data: User[]): Promise<boolean | null> {
+    try {
+      if (!data || data.length === 0)
+        return null;
+
+      const start = new Date(2026, 0, 1);
+      const end = new Date(2026, 11, 31, 23, 59, 59);
+
+
+      const usersData = data
+        .filter((user) => user.fullName && user.email && user.source)
+        .map((user) => {
+          const randomTime = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+          const randomDate = new Date(randomTime);
+          return ({
+            role: user.role ?? Role.USER,
+            full_name: user.fullName!,
+            email: user.email!,
+            phone: user.phone,
+            source: user.source!,
+            product_of_interest: user.productOfInterest,
+            budget: user.budget,
+            created_at: randomDate,
+          });
+        });
+
+      if (usersData.length === 0)
+        return null;
+
+      const query = await this.prisma.user.createMany({
+        data: usersData,
+        skipDuplicates: true,
+      });
+
+      return query.count > 0;
+    } catch (error) {
+      void logger({ error: error as Error, type: LogType.ERROR });
+      return null;
+    }
+  }
+
   async update(data: User): Promise<boolean | null> {
     try {
       if (!data.id || !data.fullName || !data.source)

@@ -12,6 +12,7 @@ export abstract class UserRepositoryPort {
   }): Promise<User[] | null>;
   abstract findByWhere(where: Prisma.UserWhereInput): Promise<User | null>;
   abstract create(data: User): Promise<boolean | null>;
+  abstract createMany(data: User[]): Promise<boolean | null>;
   abstract update(data: User): Promise<boolean | null>;
   abstract delete(id: string): Promise<boolean | null>;
   abstract findStats(): Promise<IFindStatsResponse | null>;
