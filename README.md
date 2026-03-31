@@ -88,10 +88,6 @@ npm run build
 npm run start:prod
 ```
 
-## Deploy
-
-https://leads-two-green.vercel.app/api/
-
 ### Puerto por defecto
 
 La API corre en `http://localhost:3005`
@@ -248,6 +244,30 @@ Estructura de respuesta de error:
   "data": null
 }
 ```
+
+## Despliegue en Vercel
+
+La API está configurada para desplegarse en Vercel. El archivo `vercel.json` ya está configurado para este propósito.
+
+### Configuración de Variables de Entorno en Vercel
+
+Para producción, configura las variables de entorno en el dashboard de Vercel:
+
+1. Ve a tu proyecto en [Vercel Dashboard](https://vercel.com/dashboard)
+2. Selecciona tu proyecto
+3. Ve a **Settings** > **Environment Variables**
+4. Agrega las siguientes variables:
+
+| Variable           | Descripción                                          |
+| ------------------ | ---------------------------------------------------- |
+| `DATABASE_URL`     | URL de conexión a PostgreSQL (Neon u otro proveedor) |
+| `DEEPSEEK_API_KEY` | Clave de API de DeepSeek                             |
+| `AXIOM_TOKEN`      | Token de Axiom para logging (opcional)               |
+
+### Nota Importante
+
+- Asegúrate de ejecutar `npx prisma generate` antes de desplegar para generar el cliente de Prisma
+- La base de datos debe estar accesible desde Vercel (usa Neon con SSL o configura adecuadamente)
 
 ## Licencia
 
