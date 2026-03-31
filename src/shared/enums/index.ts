@@ -28,5 +28,5 @@ export enum ParamsType {
   UPDATE = 'update',
   DELETE = 'delete',
   FIND_ALL = 'findAll',
-  FIND_BY_ID = 'findById',
+  FIND_BY_ID = 'findById'
 }

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
-import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, UpdateUserUseCase } from '@/aplications/use-cases/user';
+import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, GetStatsUseCase, UpdateUserUseCase } from '@/aplications/use-cases/user';
 import { CreateDto, UpdateDto } from '@/presentation/dtos/user';
 import { ParamsType } from '@/shared/enums';
 import { getUseCaseParams } from '@/shared/utils/commons';
@@ -14,8 +14,14 @@ export class UserController {
     private readonly createCase: CreateUserUseCase,
     private readonly deleteCase: DeleteUserUseCase,
     private readonly getCase: GetAllUserUseCase,
+    private readonly statsCase: GetStatsUseCase,
     private readonly updateCase: UpdateUserUseCase,
   ) { }
+
+  @Get('stats')
+  stats() {
+    return this.statsCase.execute();
+  }
 
   @Get()
   findAll(
