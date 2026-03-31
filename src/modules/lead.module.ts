@@ -24,4 +24,4 @@ import { SeederController } from '@/presentation/controllers/seeder.controller';
     },
   ],
 })
-export class UserModule { }
+export class LeadModule { }
