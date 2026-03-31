@@ -100,8 +100,12 @@ export class GetAISummaryUseCase {
       .map(([product, count]) => `- ${product}: ${count} leads`)
       .join('\n');
 
-    const prompt = `You are a business analyst with 10 years of experience in the real estate industry.
-    Create an executive summary in Spanish about the leads for the period ${data.periodText}.
+    const prompt = `You are a statesman and business analyst with many years of experience in the real estate industry.
+    Create an executive summary in Spanish about the leads for the period ${data.periodText} and give your opinion about the leads.
+    In the summary make a future projections about the leads.
+    Show the best way to improve the leads.
+    Quantify the results of the improvements.
+    Projections how many leads you can get in the next period.
 
 DATA:
 - Total of leads: ${data.totalLeads}
@@ -120,6 +124,7 @@ Generate an executive summary in Spanish with the following sections:
 3. RECOMMENDATIONS: Give 2-3 strategic suggestions based on the data.
 4. BUDGET: The average budget of the leads is $${data.avgBudget}.
 5. PRODUCTS: The most demanded product is ${data.mainProduct} with ${data.mainProductCount} interested.
+6. PROJECTIONS: Projections how many leads you can get in the next period.
 
 The summary must be concise, in Spanish, and in clear text format. Do not use emojis, use plain text and well structured.`;
 
@@ -188,6 +193,13 @@ El producto más popular es ${data.mainProduct} con ${data.mainProductCount} int
 
 PRESUPUESTO:
 El presupuesto promedio de los leads es de $${data.avgBudget}.
+
+PROYECCIONES:
+Las proyecciones indican que se pueden obtener entre ${(data.totalLeads * 1.1).toFixed(0)} y ${(data.totalLeads * 1.2).toFixed(0)} leads en el próximo período.
+
+OBTENCION DE LEADS:
+La obtencion de leads depende de varios factores, entre ellos la fuente de los leads, el presupuesto de los leads, el producto de interés de los leads, entre otros.
+Para obtener un 10% más de leads en el próximo período, se requeriría una inversión adicional de $${(data.totalLeads * 1.1 * 1000).toFixed(2)} y un aumento del 10% en los recursos de marketing.
 
 RECOMENDACIONES:
 1. Focalizar recursos de marketing en la fuente ${data.mainSource} para maximizar la captación de leads.

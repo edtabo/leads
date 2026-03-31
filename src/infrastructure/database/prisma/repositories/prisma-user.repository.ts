@@ -293,9 +293,8 @@ export class PrismaUserRepository implements UserRepositoryPort {
         deleted: false,
       };
 
-      if (filters.source) {
+      if (filters.source)
         where.source = filters.source;
-      }
 
       if (filters.startDate && filters.endDate) {
         where.created_at = {
@@ -307,6 +306,8 @@ export class PrismaUserRepository implements UserRepositoryPort {
         sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
         where.created_at = { gte: sevenDaysAgo };
       }
+
+      console.log("+++++++++++ ", where);
 
       const query = await this.prisma.user.findMany({
         where,
