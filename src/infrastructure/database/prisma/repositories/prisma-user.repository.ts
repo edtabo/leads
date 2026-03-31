@@ -307,8 +307,6 @@ export class PrismaUserRepository implements UserRepositoryPort {
         where.created_at = { gte: sevenDaysAgo };
       }
 
-      console.log("+++++++++++ ", where);
-
       const query = await this.prisma.user.findMany({
         where,
         select: {
@@ -338,7 +336,7 @@ export class PrismaUserRepository implements UserRepositoryPort {
             productOfInterest: item.product_of_interest,
             budget: item.budget,
             createdAt: item.created_at,
-            updatedAt: item.updated_at,
+            updatedAt: item.updated_at
           }),
       );
     } catch (error) {

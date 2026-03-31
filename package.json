@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@axiomhq/js": "^1.6.0",
+    "@axiomhq/js": "^1.4.0",
+    "@axiomhq/logging": "^0.2.0",
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",

@@ -5,94 +5,239 @@
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# API de Leads
 
-## Description
+Una API RESTful construida con NestJS para la gestión de leads, implementando **Arquitectura Hexagonal** (Ports & Adapters), **Clean Architecture** y **Domain-Driven Design**.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tecnologías y descripción
 
-## Project setup
+| Tecnología          | Descripción                                                                                                                                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **NestJS**          | Framework progresivo de Node.js con arquitectura modular, inyección de dependencias y soporte nativo para TypeScript. Ideal para aplicaciones empresariales. |
+| **Prisma ORM**      | ORM type-safe con migraciones automáticas y cliente tipado. Abstrae la complejidad de SQL y proporciona una experiencia de desarrollo superior.              |
+| **PostgreSQL**      | Base de datos relacional robusta con soporte para datos estructurados y escalabilidad.                                                                       |
+| **TypeScript**      | Tipado estático que previene errores en tiempo de desarrollo y mejora el mantenimiento del código.                                                           |
+| **Class Validator** | Decoradores para validación de DTOs en NestJS, permitiendo validación declarativa y centralizada.                                                            |
 
-```bash
-$ npm install
-```
+## Requisitos Previos
 
-## Compile and run the project
+- Node.js (v18+)
+- npm
+- PostgreSQL (local o remoto como Neon)
+
+## Instalación
+
+1. **Clonar el repositorio**
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone <repo-url>
+cd leads
 ```
 
-## Run tests
+2. **Instalar dependencias**
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+3. **Configurar variables de entorno**
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+Copia el archivo `.env.example` a `.env` y completa los valores:
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+cp .env.example .env
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Edita el archivo `.env` con tus credenciales:
 
-## Resources
+```env
+# Base de datos PostgreSQL
+DATABASE_URL="postgresql://neondb_owner:npg_TU_PASSWORD@ep-snowy-grass-an6g7m62-pooler.c-6.us-east-1.aws.neon.tech/leads?sslmode=require"
 
-Check out a few resources that may come in handy when working with NestJS:
+# API de IA (DeepSeek)
+DEEPSEEK_API_KEY="sk-tu-api-key-aqui"
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+4. **Ejecutar migraciones de Prisma**
 
-## Support
+```bash
+npx prisma migrate dev --name init
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+5. **Generar el cliente de Prisma**
 
-## Stay in touch
+```bash
+npx prisma generate
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Ejecución
 
-## License
+### Desarrollo (con hot-reload)
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+```bash
+npm run start:dev
+```
+
+### Producción
+
+```bash
+npm run build
+npm run start:prod
+```
+
+### Puerto por defecto
+
+La API corre en `http://localhost:3005`
+
+## Ejecutar el Seed (Poblar datos)
+
+El endpoint de seed carga 25 leads de ejemplo en la base de datos:
+
+```bash
+curl -X GET http://localhost:3005/api/seeder
+```
+
+Respuesta exitosa:
+
+```json
+{
+  "status": "success",
+  "message": "Leads created successfully",
+  "data": {
+    "count": 25,
+    "leads": [...]
+  }
+}
+```
+
+> **Nota**: El seed es idempotente. Puedes ejecutarlo múltiples veces.
+
+## Endpoints de la API
+
+### Leads
+
+| Método   | Endpoint         | Descripción                              |
+| -------- | ---------------- | ---------------------------------------- |
+| `GET`    | `/api/leads`     | Obtener todos los leads (con paginación) |
+| `GET`    | `/api/leads/:id` | Obtener un lead por ID                   |
+| `POST`   | `/api/leads`     | Crear un nuevo lead                      |
+| `PATCH`  | `/api/leads/:id` | Actualizar un lead                       |
+| `DELETE` | `/api/leads/:id` | Eliminar (soft-delete) un lead           |
+
+### Seeder
+
+| Método | Endpoint      | Descripción                                  |
+| ------ | ------------- | -------------------------------------------- |
+| `GET`  | `/api/seeder` | Poblar la base de datos con leads de ejemplo |
+
+### Stats
+
+| Método | Endpoint           | Descripción                   |
+| ------ | ------------------ | ----------------------------- |
+| `GET`  | `/api/leads/stats` | Obtener estadísticas de leads |
+
+## Ejemplos de Uso
+
+### 1. Crear un Lead
+
+```bash
+curl -X POST http://localhost:3005/api/leads \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": "Juan Pérez",
+    "email": "juan@example.com",
+    "phone": "+573001234567",
+    "source": "instagram",
+    "productOfInterest": "Plan Premium",
+    "budget": 150000
+  }'
+```
+
+**Fuentes válidas**: `instagram`, `facebook`, `landing_page`, `referido`, `other`
+
+### 2. Obtener Todos los Leads
+
+```bash
+curl -X GET "http://localhost:3005/api/leads?page=1&limit=10"
+```
+
+### 3. Obtener un Lead por ID
+
+```bash
+curl -X GET http://localhost:3005/api/leads/1
+```
+
+### 4. Actualizar un Lead
+
+```bash
+curl -X PATCH http://localhost:3005/api/leads/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": "Juan Pérez Actualizado",
+    "budget": 200000
+  }'
+```
+
+### 5. Eliminar un Lead
+
+```bash
+curl -X DELETE http://localhost:3005/api/leads/1
+```
+
+### 6. Obtener Estadísticas
+
+```bash
+curl -X GET http://localhost:3005/api/leads/stats
+```
+
+## Estructura del Proyecto
+
+```
+src/
+├── aplications/
+│   └── use-cases/          # Casos de uso (application layer)
+├── domain/
+│   ├── entities/          # Entidades del dominio
+│   └── ports/             # Puertos (interfaces)
+├── infrastructure/
+│   └── database/
+│       └── prisma/        # Implementaciones de infraestructura
+├── modules/               # Módulos NestJS
+├── presentation/
+│   ├── controllers/     # Controladores API
+│   └── dtos/            # DTOs de request/response
+└── shared/              # Utilidades compartidas
+```
+
+## Variables de Entorno (.env.example)
+
+```env
+# Base de datos PostgreSQL
+DATABASE_URL="postgresql://[user]:[password]@[host]/[database]?sslmode=require"
+
+# API de IA (DeepSeek)
+DEEPSEEK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+## Manejo de Errores
+
+La API implementa un manejo de errores consistente en todos los endpoints:
+
+- **Errores de validación**: Retornan 400 con detalles del error
+- **Errores de negocio**: Retornan 400/409 con mensaje específico
+- **Errores de servidor**: Retornan 500 con mensaje genérico
+- **Recursos no encontrados**: Retornan 404
+
+Estructura de respuesta de error:
+
+```json
+{
+  "status": "error",
+  "message": "Mensaje descriptivo del error",
+  "data": null
+}
+```
+
+## Licencia
+
+MIT
