@@ -1,9 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Prisma } from '@prisma/client';
 
 import { User } from '@/domain/entities/user.entity';
 import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
 import { LIMIT_DEFAULT, PAGE_DEFAULT } from '@/shared/constants';
-import { LogType, ResponseStatus, Role } from '@/shared/enums';
+import { LogType, ResponseStatus, Role, Source } from '@/shared/enums';
 import { IResponse, IUseCaseParams } from '@/shared/interfaces';
 import { app } from '@/shared/localizations';
 import { logger } from '@/shared/utils/logger';
@@ -17,15 +18,31 @@ export class GetAllUserUseCase {
 
   async getAll(props: IUseCaseParams<unknown>): Promise<IResponse<User[]>> {
     try {
-      const { limit, page } = props;
+      const { limit, page, search } = props;
+
+      const where: Prisma.UserWhereInput = {};
+
+      if (search) {
+        if (Object.values(Source).includes(search as Source)) {
+          where.OR = [
+            { source: search },
+          ];
+        }
+        else if (search.includes('__')) {
+          const [startDate, endDate] = search.split('__');
+          where.OR = [
+            { created_at: { gte: new Date(startDate + "T00:00:00"), lte: new Date(endDate + "T23:59:59") } },
+          ];
+        }
+      }
 
       const query = await this.repository.findAll({
         limit: limit ?? LIMIT_DEFAULT,
         page: page ?? PAGE_DEFAULT,
-        where: {},
+        where,
       });
 
-      const pagesQuery = await this.repository.findCount({ role: Role.USER });
+      const pagesQuery = await this.repository.findCount({ ...where, role: Role.USER });
 
       if (query === null || pagesQuery === null)
         return { status: ResponseStatus.ERROR, message: app.errors.tryAgain };

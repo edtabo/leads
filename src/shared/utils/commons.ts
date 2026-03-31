@@ -12,7 +12,7 @@ interface IUseCaseParamsProps<T> {
 
 export const getUseCaseParams = <T>(data: IUseCaseParamsProps<T>) => {
   const { body, id, queryParams, type } = data;
-  const { limit, page } = queryParams || {};
+  const { limit, page, search } = queryParams || {};
 
   switch (type) {
     case ParamsType.CREATE:
@@ -35,9 +35,12 @@ export const getUseCaseParams = <T>(data: IUseCaseParamsProps<T>) => {
       if (currentLimit <= LIMIT_DEFAULT)
         currentLimit = LIMIT_DEFAULT;
 
+      const currentSearch = search ? search : '';
+
       return {
         limit: currentLimit,
         page: page ? Number(page) : PAGE_DEFAULT,
+        search: currentSearch,
       };
     }
     case ParamsType.FIND_BY_ID:
