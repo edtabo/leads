@@ -4,7 +4,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['error', 'warn', 'log', 'debug', 'verbose'],
+  });
 
   app.setGlobalPrefix('api');
   app.enableCors({
@@ -25,5 +27,8 @@ async function bootstrap() {
   );
 
   await app.listen(process.env.PORT ?? 3005);
+
+  return app;
 }
-bootstrap();
+
+export default bootstrap();
