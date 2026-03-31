@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 
-import { UserModule } from '@/modules/user.module';
+import { LeadModule } from '@/modules/lead.module';
 
 @Module({
-  imports: [UserModule],
+  imports: [LeadModule],
   controllers: [],
   providers: [],
 })
