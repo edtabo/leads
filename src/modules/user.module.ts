@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { GetAISummaryUseCase } from '@/aplications/use-cases/leads/get-ai-summary.usecase';
 import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, GetStatsUseCase, SeedLeadsUseCase, UpdateUserUseCase } from '@/aplications/use-cases/user';
 import { PrismaModule } from '@/infrastructure/database/prisma/prisma.module';
 import { PrismaUserRepository } from '@/infrastructure/database/prisma/repositories/prisma-user.repository';
@@ -16,6 +17,7 @@ import { SeederController } from '@/presentation/controllers/seeder.controller';
     SeedLeadsUseCase,
     UpdateUserUseCase,
     DeleteUserUseCase,
+    GetAISummaryUseCase,
     {
       provide: 'UserRepositoryPort',
       useClass: PrismaUserRepository,

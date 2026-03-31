@@ -1,11 +1,13 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
+import { GetAISummaryUseCase } from '@/aplications/use-cases/leads/get-ai-summary.usecase';
 import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, GetStatsUseCase, UpdateUserUseCase } from '@/aplications/use-cases/user';
 import { CreateDto, UpdateDto } from '@/presentation/dtos/user';
 import { ParamsType } from '@/shared/enums';
 import { getUseCaseParams } from '@/shared/utils/commons';
 
 import { QueryDto } from '../dtos/commons';
+import { GetAISummaryDto } from '../dtos/leads/get-ai-summary.dto';
 
 @Controller('leads')
 export class LeadsController {
@@ -16,7 +18,15 @@ export class LeadsController {
     private readonly getCase: GetAllUserUseCase,
     private readonly statsCase: GetStatsUseCase,
     private readonly updateCase: UpdateUserUseCase,
+    private readonly aiSummaryCase: GetAISummaryUseCase,
   ) { }
+
+  @Post('ai/summary')
+  getAISummary(
+    @Body() body: GetAISummaryDto,
+  ) {
+    return this.aiSummaryCase.execute(body);
+  }
 
   @Get('stats')
   stats() {

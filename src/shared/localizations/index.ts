@@ -9,4 +9,7 @@ export const app = {
     update: 'Actualización exitosa',
     delete: 'Eliminación exitosa',
   },
+  aiSummary: {
+    noLeads: 'No se encontraron leads con los filtros proporcionados.',
+  },
 };

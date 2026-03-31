@@ -4,7 +4,7 @@ import { Prisma } from '@prisma/client';
 import { User } from '@/domain/entities/user.entity';
 import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
 import { PrismaService } from '@/infrastructure/database/prisma/prisma.service';
-import { IFindStatsResponse } from '@/presentation/interfaces/leads';
+import { IFindStatsResponse, ILeadFilters } from '@/presentation/interfaces/leads';
 import { LogType, Role } from '@/shared/enums';
 import { logger } from '@/shared/utils/logger';
 
@@ -281,6 +281,65 @@ export class PrismaUserRepository implements UserRepositoryPort {
         averageBudget: parseFloat(avgBudget._avg.budget?.toFixed(2) || '0'),
         leadsLast7Days: formattedLeadsLast7Days,
       };
+    } catch (error) {
+      void logger({ error: error as Error, type: LogType.ERROR });
+      return null;
+    }
+  }
+
+  async findByFilters(filters: ILeadFilters): Promise<User[] | null> {
+    try {
+      const where: Prisma.UserWhereInput = {
+        deleted: false,
+      };
+
+      if (filters.source) {
+        where.source = filters.source;
+      }
+
+      if (filters.startDate && filters.endDate) {
+        where.created_at = {
+          gte: new Date(filters.startDate + 'T00:00:00'),
+          lte: new Date(filters.endDate + 'T23:59:59'),
+        };
+      } else if (!filters.source) {
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        where.created_at = { gte: sevenDaysAgo };
+      }
+
+      const query = await this.prisma.user.findMany({
+        where,
+        select: {
+          id: true,
+          role: true,
+          full_name: true,
+          email: true,
+          phone: true,
+          source: true,
+          product_of_interest: true,
+          budget: true,
+          created_at: true,
+          updated_at: true,
+        },
+        orderBy: { created_at: 'desc' },
+      });
+
+      return query.map(
+        (item) =>
+          new User({
+            id: item.id.toString(),
+            role: item.role,
+            fullName: item.full_name,
+            email: item.email,
+            phone: item.phone,
+            source: item.source,
+            productOfInterest: item.product_of_interest,
+            budget: item.budget,
+            createdAt: item.created_at,
+            updatedAt: item.updated_at,
+          }),
+      );
     } catch (error) {
       void logger({ error: error as Error, type: LogType.ERROR });
       return null;

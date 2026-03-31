@@ -12,3 +12,9 @@ export interface IFindStatsResponse {
     createdAt: string;
   }>;
 }
+
+export interface ILeadFilters {
+  source?: string;
+  startDate?: string;
+  endDate?: string;
+}

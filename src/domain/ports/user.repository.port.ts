@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
 import { User } from '@/domain/entities/user.entity';
-import { IFindStatsResponse } from '@/presentation/interfaces/leads';
+import { IFindStatsResponse, ILeadFilters } from '@/presentation/interfaces/leads';
 
 export abstract class UserRepositoryPort {
   abstract findCount(where: Prisma.UserWhereInput): Promise<number | null>;
@@ -16,6 +16,7 @@ export abstract class UserRepositoryPort {
   abstract update(data: User): Promise<boolean | null>;
   abstract delete(id: string): Promise<boolean | null>;
   abstract findStats(): Promise<IFindStatsResponse | null>;
+  abstract findByFilters(filters: ILeadFilters): Promise<User[] | null>;
 }
 
 
