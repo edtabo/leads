@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { LeadModule } from '@/modules/lead.module';
+import { LeadModule } from './modules/lead.module';
+
 
 @Module({
   imports: [LeadModule],
