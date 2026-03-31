@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 
-import { GetAISummaryUseCase } from '@/aplications/use-cases/leads/get-ai-summary.usecase';
-import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, GetStatsUseCase, UpdateUserUseCase } from '@/aplications/use-cases/user';
-import { CreateDto, UpdateDto } from '@/presentation/dtos/user';
-import { ParamsType } from '@/shared/enums';
-import { getUseCaseParams } from '@/shared/utils/commons';
-
+import { GetAISummaryUseCase } from '../../aplications/use-cases/leads/get-ai-summary.usecase';
+import { CreateUserUseCase, DeleteUserUseCase, GetAllUserUseCase, GetStatsUseCase, UpdateUserUseCase } from '../../aplications/use-cases/user';
+import { CreateDto, UpdateDto } from '../../presentation/dtos/user';
+import { ParamsType } from '../../shared/enums';
+import { getUseCaseParams } from '../../shared/utils/commons';
 import { QueryDto } from '../dtos/commons';
 import { GetAISummaryDto } from '../dtos/leads/get-ai-summary.dto';
 

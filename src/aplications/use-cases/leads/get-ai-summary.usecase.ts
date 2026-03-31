@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
-import { ILeadFilters } from '@/presentation/interfaces/leads';
-import { LogType, ResponseStatus } from '@/shared/enums';
-import { IResponse } from '@/shared/interfaces';
-import { app } from '@/shared/localizations';
-import { logger } from '@/shared/utils/logger';
+import { UserRepositoryPort } from '../../../domain/ports/user.repository.port';
+import { ILeadFilters } from '../../../presentation/interfaces/leads';
+import { LogType, ResponseStatus } from '../../../shared/enums';
+import { IResponse } from '../../../shared/interfaces';
+import { app } from '../../../shared/localizations';
+import { logger } from '../../../shared/utils/logger';
 
 @Injectable()
 export class GetAISummaryUseCase {

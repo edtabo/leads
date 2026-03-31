@@ -1,6 +1,6 @@
 import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-import { Source } from '@/shared/enums';
+import { Source } from '../../../shared/enums';
 
 export class UpdateDto {
   @IsString({ message: 'El nombre debe ser una cadena de texto' })

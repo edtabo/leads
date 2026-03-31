@@ -2,8 +2,7 @@ import { Axiom } from "@axiomhq/js";
 import { AxiomJSTransport, ConsoleTransport, Logger } from "@axiomhq/logging";
 import { Prisma } from '@prisma/client';
 
-import { LogType } from '@/shared/enums';
-
+import { LogType } from '../enums';
 
 interface props {
   error?: Error;

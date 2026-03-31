@@ -1,7 +1,7 @@
 import { Prisma } from '@prisma/client';
 
-import { User } from '@/domain/entities/user.entity';
-import { IFindStatsResponse, ILeadFilters } from '@/presentation/interfaces/leads';
+import { IFindStatsResponse, ILeadFilters } from '../../presentation/interfaces/leads';
+import { User } from '../entities/user.entity';
 
 export abstract class UserRepositoryPort {
   abstract findCount(where: Prisma.UserWhereInput): Promise<number | null>;

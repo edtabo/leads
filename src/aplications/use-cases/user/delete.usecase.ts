@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
-import { LogType, ResponseStatus } from '@/shared/enums';
-import { IResponse, IUseCaseParams } from '@/shared/interfaces';
-import { app } from '@/shared/localizations';
-import { logger } from '@/shared/utils/logger';
+import { UserRepositoryPort } from '../../../domain/ports/user.repository.port';
+import { LogType, ResponseStatus } from '../../../shared/enums';
+import { IResponse, IUseCaseParams } from '../../../shared/interfaces';
+import { app } from '../../../shared/localizations';
+import { logger } from '../../../shared/utils/logger';
 
 @Injectable()
 export class DeleteUserUseCase {

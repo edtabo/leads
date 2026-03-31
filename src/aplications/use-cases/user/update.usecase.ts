@@ -1,12 +1,12 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { User } from '@/domain/entities/user.entity';
-import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
-import { UpdateDto } from '@/presentation/dtos/user';
-import { LogType, ResponseStatus, Role } from '@/shared/enums';
-import { IResponse, IUseCaseParams } from '@/shared/interfaces';
-import { app } from '@/shared/localizations';
-import { logger } from '@/shared/utils/logger';
+import { User } from '../../../domain/entities/user.entity';
+import { UserRepositoryPort } from '../../../domain/ports/user.repository.port';
+import { UpdateDto } from '../../../presentation/dtos/user';
+import { LogType, ResponseStatus, Role } from '../../../shared/enums';
+import { IResponse, IUseCaseParams } from '../../../shared/interfaces';
+import { app } from '../../../shared/localizations';
+import { logger } from '../../../shared/utils/logger';
 
 @Injectable()
 export class UpdateUserUseCase {

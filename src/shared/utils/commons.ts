@@ -1,7 +1,6 @@
-import { QueryDto } from '@/presentation/dtos/commons';
-import { ParamsType } from '@/shared/enums';
-
+import { QueryDto } from '../../presentation/dtos/commons';
 import { LIMIT_DEFAULT, PAGE_DEFAULT } from '../constants';
+import { ParamsType } from '../enums';
 
 interface IUseCaseParamsProps<T> {
   body?: T,

@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
-import { User } from '@/domain/entities/user.entity';
-import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
-import { PrismaService } from '@/infrastructure/database/prisma/prisma.service';
-import { IFindStatsResponse, ILeadFilters } from '@/presentation/interfaces/leads';
-import { LogType, Role } from '@/shared/enums';
-import { logger } from '@/shared/utils/logger';
+import { User } from '../../../../domain/entities/user.entity';
+import { UserRepositoryPort } from '../../../../domain/ports/user.repository.port';
+import { IFindStatsResponse, ILeadFilters } from '../../../../presentation/interfaces/leads';
+import { LogType, Role } from '../../../../shared/enums';
+import { logger } from '../../../../shared/utils/logger';
+import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepositoryPort {

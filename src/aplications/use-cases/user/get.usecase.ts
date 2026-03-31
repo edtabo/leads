@@ -1,13 +1,13 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 
-import { User } from '@/domain/entities/user.entity';
-import { UserRepositoryPort } from '@/domain/ports/user.repository.port';
-import { LIMIT_DEFAULT, PAGE_DEFAULT } from '@/shared/constants';
-import { LogType, ResponseStatus, Role, Source } from '@/shared/enums';
-import { IResponse, IUseCaseParams } from '@/shared/interfaces';
-import { app } from '@/shared/localizations';
-import { logger } from '@/shared/utils/logger';
+import { User } from '../../../domain/entities/user.entity';
+import { UserRepositoryPort } from '../../../domain/ports/user.repository.port';
+import { LIMIT_DEFAULT, PAGE_DEFAULT } from '../../../shared/constants';
+import { LogType, ResponseStatus, Role, Source } from '../../../shared/enums';
+import { IResponse, IUseCaseParams } from '../../../shared/interfaces';
+import { app } from '../../../shared/localizations';
+import { logger } from '../../../shared/utils/logger';
 
 @Injectable()
 export class GetAllUserUseCase {
