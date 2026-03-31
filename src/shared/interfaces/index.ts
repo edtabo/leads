@@ -1,12 +1,12 @@
-export interface UseCaseParams<T> {
-  id?: string;
+export interface IUseCaseParams<T> {
+  id?: string | number;
   limit?: number;
   page?: number;
   body?: T;
 }
 
 
-export class Response<T> {
+export class IResponse<T> {
   constructor(
     public status: string,
     public data?: T[] | T,

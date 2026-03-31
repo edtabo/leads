@@ -22,3 +22,11 @@ export enum Role {
   ADMIN = 0,
   USER = 100
 }
+
+export enum ParamsType {
+  CREATE = 'create',
+  UPDATE = 'update',
+  DELETE = 'delete',
+  FIND_ALL = 'findAll',
+  FIND_BY_ID = 'findById',
+}
